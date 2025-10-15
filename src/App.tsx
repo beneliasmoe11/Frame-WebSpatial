@@ -3,9 +3,6 @@ import { initScene } from "@webspatial/react-sdk";
 import "./App.css";
 import SecondPage from "./SecondPage";
 
-// Declare global variable injected by vite
-declare const __XR_ENV_BASE__: string;
-
 function MainPage() {
   const stories = [
     {
@@ -66,7 +63,8 @@ function MainPage() {
         },
       };
     });
-    window.open(`${__XR_ENV_BASE__}/logo`, "logo-scene");
+    const basePath = __XR_ENV_BASE__ === '/' ? '' : __XR_ENV_BASE__;
+    window.open(`${basePath}/logo`, 'logo-scene');
 
     // Open each story in a separate Vision Pro window
     stories.forEach((story) => {
@@ -85,7 +83,8 @@ function MainPage() {
 
       // Open each story in its own window with unique name
       // Pass the story ID as a URL parameter
-      window.open(`${__XR_ENV_BASE__}/story?id=${story.id}`, sceneName);
+      const basePath = __XR_ENV_BASE__ === '/' ? '' : __XR_ENV_BASE__;
+      window.open(`${basePath}/story?id=${story.id}`, sceneName);
     });
   };
 
